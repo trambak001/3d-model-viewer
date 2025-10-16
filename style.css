@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #23272a;
+  color: #fff;
+  text-align: center;
+}
+#viewer-container {
+  width: 80vw;
+  height: 60vh;
+  margin: 2rem auto;
+  background: #181c20;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+#model-upload {
+  margin-top: 1rem;
+}
