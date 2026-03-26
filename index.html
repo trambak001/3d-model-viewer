@@ -2,13 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive 3D Model Viewer built with Three.js. Load and explore GLTF/GLB 3D models in your browser." />
   <title>3D Model Viewer | Three.js</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>3D Model Viewer</h1>
-  <div id="viewer-container"></div>
-  <input type="file" accept=".glb,.gltf,.obj" id="model-upload" />
+  <!-- Header -->
+  <header class="app-header" role="banner">
+    <div class="header-content">
+      <h1 class="app-title">
+        <span class="title-icon" aria-hidden="true">⬡</span>
+        3D Model Viewer
+      </h1>
+      <p class="app-subtitle">Load and explore GLTF &amp; GLB models in your browser</p>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="app-main" role="main">
+
+    <!-- Controls panel -->
+    <section class="controls-panel" aria-label="Model upload controls">
+      <div class="upload-area" id="upload-area" role="region" aria-label="Drop zone for 3D model files">
+        <div class="upload-icon" aria-hidden="true">📁</div>
+        <p class="upload-label">Drag &amp; drop a <strong>.glb</strong> or <strong>.gltf</strong> file here</p>
+        <p class="upload-or">— or —</p>
+        <label class="upload-btn" for="model-upload">
+          <span>Choose File</span>
+          <input
+            type="file"
+            accept=".glb,.gltf"
+            id="model-upload"
+            aria-label="Upload a GLB or GLTF 3D model file"
+          />
+        </label>
+        <p class="upload-hint">Supported formats: <abbr title="GL Transmission Format Binary">GLB</abbr>, <abbr title="GL Transmission Format">GLTF</abbr> &nbsp;·&nbsp; Max size: 50 MB</p>
+      </div>
+
+      <!-- Error message area -->
+      <div id="error-message" class="error-message" role="alert" aria-live="assertive" hidden>
+        <span class="error-icon" aria-hidden="true">⚠️</span>
+        <span id="error-text"></span>
+        <button class="error-close" id="error-close" aria-label="Dismiss error">✕</button>
+      </div>
+    </section>
+
+    <!-- Viewer area -->
+    <section class="viewer-section" aria-label="3D model viewport">
+      <!-- Loading overlay -->
+      <div id="loading-overlay" class="loading-overlay" role="status" aria-label="Loading model" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="loading-text">Loading model…</p>
+        <p id="loading-detail" class="loading-detail"></p>
+      </div>
+
+      <!-- Three.js canvas container -->
+      <div id="viewer-container" aria-label="3D model viewport — use mouse or touch to rotate, scroll to zoom"></div>
+
+      <!-- Viewer controls hint -->
+      <div class="viewer-hint" aria-label="Viewer navigation hints">
+        <span>🖱 Drag to rotate</span>
+        <span>⚙ Scroll to zoom</span>
+        <span>✋ Right-click drag to pan</span>
+      </div>
+    </section>
+
+    <!-- Model info panel -->
+    <aside id="info-panel" class="info-panel" aria-label="Loaded model information" hidden>
+      <h2 class="info-panel-title">Model Info</h2>
+      <dl class="info-grid">
+        <dt>File name</dt>
+        <dd id="info-filename">—</dd>
+        <dt>File size</dt>
+        <dd id="info-filesize">—</dd>
+        <dt>Meshes</dt>
+        <dd id="info-meshes">—</dd>
+        <dt>Vertices</dt>
+        <dd id="info-vertices">—</dd>
+        <dt>Triangles</dt>
+        <dd id="info-triangles">—</dd>
+        <dt>Materials</dt>
+        <dd id="info-materials">—</dd>
+      </dl>
+      <button class="reset-btn" id="reset-camera" aria-label="Reset camera to default position">↺ Reset Camera</button>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <p>Built with <a href="https://threejs.org" target="_blank" rel="noopener noreferrer">Three.js</a> &nbsp;·&nbsp;
+       <a href="https://github.com/trambak001/3d-model-viewer" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+  </footer>
+
+  <!-- Three.js CDN scripts -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.156.1/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.156.1/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.156.1/examples/js/loaders/GLTFLoader.js"></script>
