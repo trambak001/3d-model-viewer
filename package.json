@@ -1,0 +1,28 @@
+{
+  "name": "3d-model-viewer",
+  "version": "1.0.0",
+  "description": "Browser-based 3D model viewer built with Three.js. Supports GLTF/GLB file loading, orbit controls, and model statistics.",
+  "homepage": "https://trambak001.github.io/3d-model-viewer/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trambak001/3d-model-viewer.git"
+  },
+  "author": "trambak001",
+  "license": "MIT",
+  "keywords": [
+    "three.js",
+    "3d",
+    "model-viewer",
+    "gltf",
+    "glb",
+    "webgl",
+    "javascript"
+  ],
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --listen 8080"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
